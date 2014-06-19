@@ -15,8 +15,8 @@ var extend = function extend() {
 
 // 2d vectors
 var Vector = function(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = !isNaN(x) ? x : 0;
+    this.y = !isNaN(y) ? y : 0;
 };
 
 // static
@@ -39,6 +39,12 @@ extend(Vector.prototype, {
         return this;
     },
 
+    substract: function(v) {
+        this.x -= v.x;
+        this.y -= v.y;
+        return this;
+    },
+
     multiply: function(value) {
         this.x *= value;
         this.y *= value;
@@ -53,6 +59,7 @@ extend(Vector.prototype, {
         var multiplier = multiplier ? multiplier : 1;
         var mag = this.magnitude();
 
+        if (mag === 0) { return this; }
         this.x = (this.x / mag) * multiplier;
         this.y = (this.y / mag) * multiplier;
 
@@ -62,13 +69,21 @@ extend(Vector.prototype, {
     magnitude: function() {
         var hyp = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         return Math.abs(hyp);
+    },
+
+    // a bit strange and probably false
+    direction: function() {
+        var direction = Math.atan2(this.x, this.y) + Math.PI;
+        if ((this.x > 0 && this.y < 0) || (this.x < 0 && this.y > 0)) {
+            direction += Math.PI;
+        }
+
+        return direction -= Math.PI;
     }
 });
 
-// var v1 = new Vector(2, 2);
-// var v2 = new Vector(3, 3);
-//
-// var v3 = Vector.add(v1, v2);
+// var v1 = new Vector();
+// console.log(v1.normalize());
 // console.log(v3);
 
 
