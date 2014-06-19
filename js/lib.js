@@ -71,14 +71,10 @@ extend(Vector.prototype, {
         return Math.abs(hyp);
     },
 
-    // a bit strange and probably false
     direction: function() {
-        var direction = Math.atan2(this.x, this.y) + Math.PI;
-        if ((this.x > 0 && this.y < 0) || (this.x < 0 && this.y > 0)) {
-            direction += Math.PI;
-        }
-
-        return direction -= Math.PI;
+        // weird atan2 signature...
+        // cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+        return Math.atan2(this.y, this.x);
     }
 });
 
