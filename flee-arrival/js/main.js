@@ -33,7 +33,7 @@ select.addEventListener('change', function(e) {
     });
 }, false);
 
-canvas.addEventListener('click', function(e) {
+canvas.addEventListener('mousemove', function(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);
