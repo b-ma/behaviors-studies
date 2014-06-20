@@ -1,44 +1,46 @@
-(function() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
+//  configuration
+var SHAPE_COUNT = 10;
+var shapes = [];
 
-    var width = ctx.canvas.width = 500;
-    var height = ctx.canvas.height = 200;
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
 
-    var nbrShapes = 10;
-    var shapes = [];
+var width = ctx.canvas.width = 500;
+var height = ctx.canvas.height = 200;
 
-    for (var i = 0; i < nbrShapes; i++) {
-        var shape = new Shape(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height);
-        shapes.push(shape);
+//  init shapes
+for (var i = 0; i < SHAPE_COUNT; i++) {
+    var shape = new Shape(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height);
+    shapes.push(shape);
+}
+
+//  listen mouse
+//  var mouse = new Vector;
+//  canvas.addEventListener('mousemove', function(e) {
+//      mouse.x = e.offsetX;
+//      mouse.y = e.offsetY;
+//  }, false);
+
+//  loop
+(function loop() {
+    // add layer to scene
+    ctx.save();
+    ctx.fillStyle = '#000000';
+    // ctx.globalAlpha = 0.1;
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
+
+    // update scene
+    for (var i in shapes) {
+        shapes[i].update(width, height, mouse);
+        shapes[i].display(ctx);
     }
 
-    // var mouse = new Vector;
-    // canvas.addEventListener('mousemove', function(e) {
-    //     mouse.x = e.offsetX;
-    //     mouse.y = e.offsetY;
-    // }, false);
+    //  draw mouse position
+    //  ctx.beginPath();
+    //  ctx.fillStyle = '#ff0000';
+    //  ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
+    //  ctx.fill();
 
-    (function loop() {
-        // add layer to scene
-        ctx.save();
-        ctx.fillStyle = '#000000';
-        // ctx.globalAlpha = 0.1;
-        ctx.fillRect(0, 0, width, height);
-        ctx.restore();
-
-        // update scene
-        for (var i in shapes) {
-            shapes[i].update(width, height, mouse);
-            shapes[i].display(ctx);
-        }
-
-        //  draw mouse position
-        //  ctx.beginPath();
-        //  ctx.fillStyle = '#ff0000';
-        //  ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
-        //  ctx.fill();
-
-        requestAnimationFrame(loop);
-    }());
-});
+    requestAnimationFrame(loop);
+}());

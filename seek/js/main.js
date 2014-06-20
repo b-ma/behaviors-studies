@@ -1,19 +1,20 @@
+var SHAPE_COUNT = 20;
+var shapes = [];
+
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
 var width = ctx.canvas.width = 500;
 var height = ctx.canvas.height = 200;
 
-var nbrShapes = 10;
-var shapes = [];
 
-for (var i = 0; i < nbrShapes; i++) {
+for (var i = 0; i < SHAPE_COUNT; i++) {
     var shape = new Shape(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height);
     shapes.push(shape);
 }
 var mouse = new Vector;
 
-canvas.addEventListener('mousemove', function(e) {
+canvas.addEventListener('click', function(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);

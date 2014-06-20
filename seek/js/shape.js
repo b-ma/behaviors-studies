@@ -3,7 +3,7 @@ var Shape =  function(x, y) {
     this.velocity = new Vector(Math.random() * 2 - 1, Math.random() * 2 - 1);
 
     this.MAX_VELOCITY = 2;
-    this.mass = Math.random() * 5;
+    this.mass = Math.random() * 30;
 }
 
 extend(Shape.prototype, {
@@ -19,13 +19,16 @@ extend(Shape.prototype, {
 
         var desiredVelocity = Vector.substract(mouse, this.position);
         var steering = Vector.substract(desiredVelocity, this.velocity);
-        steering.divide(this.mass);
 
-        this.velocity.add(steering);
-        this.velocity.normalize(this.MAX_VELOCITY);
+        steering
+            .normalize()
+            .divide(this.mass);
+
+        this.velocity
+            .add(steering)
+            .normalize(this.MAX_VELOCITY);
 
         this.position.add(this.velocity);
-
         this.bounce(w, h);
     },
 
