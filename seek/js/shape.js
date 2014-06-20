@@ -2,7 +2,8 @@ var Shape =  function(x, y) {
     this.position = new Vector(x, y);
     this.velocity = new Vector(Math.random() * 2 - 1, Math.random() * 2 - 1);
 
-    this.maxVelocity = 2;
+    this.MAX_VELOCITY = 2;
+    this.mass = Math.random() * 5;
 }
 
 extend(Shape.prototype, {
@@ -13,8 +14,15 @@ extend(Shape.prototype, {
         if (this.position.y < 0) { this.position.y = h; }
     },
 
-    update: function(w, h) {
-        this.velocity.normalize(this.maxVelocity);
+    update: function(w, h, mouse) {
+        this.velocity.normalize();
+
+        var desiredVelocity = Vector.substract(mouse, this.position);
+        var steering = Vector.substract(desiredVelocity, this.velocity);
+        steering.divide(this.mass);
+
+        this.velocity.add(steering);
+        this.velocity.normalize(this.MAX_VELOCITY);
 
         this.position.add(this.velocity);
 
@@ -28,6 +36,7 @@ extend(Shape.prototype, {
         ctx.rotate(this.velocity.direction());
 
         // draw shape
+        ctx.beginPath();
         ctx.fillStyle = '#ffffff';
         ctx.moveTo(-4, 4);
         ctx.lineTo(-4, -4);
