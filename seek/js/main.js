@@ -14,10 +14,13 @@ for (var i = 0; i < SHAPE_COUNT; i++) {
 }
 var mouse = new Vector;
 
-canvas.addEventListener('click', function(e) {
-    mouse.x = e.offsetX;
-    mouse.y = e.offsetY;
-}, false);
+// canvas.addEventListener('click', function(e) {
+(function updateTarget() {
+    mouse.x = Math.random() * width;
+    mouse.y = Math.random() * height;
+    setTimeout(updateTarget, 2 * 1000 * Math.random() + 1500);
+}());
+// }, false);
 
 (function loop() {
     // add layer to scene
@@ -34,10 +37,10 @@ canvas.addEventListener('click', function(e) {
     }
 
     //  draw mouse position
-    ctx.beginPath();
-    ctx.fillStyle = '#ff0000';
-    ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
-    ctx.fill();
+    //  ctx.beginPath();
+    //  ctx.fillStyle = '#ff0000';
+    //  ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
+    //  ctx.fill();
 
     requestAnimationFrame(loop);
 }());

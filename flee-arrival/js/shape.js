@@ -7,7 +7,7 @@ var Shape =  function(x, y) {
 
 extend(Shape.prototype, {
     initialize: function(x, y, behavior) {
-        this.MAX_VELOCITY = 1;
+        this.MAX_VELOCITY = 1.3;
         this.mass = Math.random() * 20;
 
         this.setBehavior(behavior);
@@ -39,6 +39,7 @@ extend(Shape.prototype, {
     },
 
     setBehavior: function(name) {
+        // strategy
         switch (name) {
             case 'flee':
                 this.behavior = this.fleeBehavior;
