@@ -23,9 +23,11 @@ for (var i = 0; i < nbrDots; i++) {
 }
 
 (function loop() {
+    ctx.save();
     ctx.fillStyle = '#000000';
-    // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.globalAlpha = 0.1;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.restore();
 
     for (var i in dots) {
         dots[i].update(ctx.canvas.width, ctx.canvas.height, dots);
