@@ -1,13 +1,14 @@
 //  configuration
-var SHAPE_COUNT = 1;
+var SHAPE_COUNT = 30;
 var shapes = [];
 
 var width = 500;
 var height = 200;
 
 var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+var select = document.getElementById('select');
 
+var ctx = canvas.getContext('2d');
 ctx.canvas.width = width;
 ctx.canvas.height = height;
 
@@ -18,17 +19,26 @@ canvas.style.height = height + 'px';
 for (var i = 0; i < SHAPE_COUNT; i++) {
     var x = Math.random() * ctx.canvas.width;
     var y = Math.random() * ctx.canvas.height;
-    var shape = new Shape(x, y);
+    var shape = new Shape(x, y, 'flee');
     shapes.push(shape);
 }
 
 //  listen mouse
 var mouse = new Vector;
 
-canvas.addEventListener('click', function(e) {
+select.addEventListener('change', function(e) {
+    var behavior = e.currentTarget.value;
+
+    shapes.forEach(function(shape) {
+        shape.setBehavior(behavior);
+    });
+});
+
+canvas.addEventListener('mousemove', function(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);
+
 
 //  loop
 (function loop() {

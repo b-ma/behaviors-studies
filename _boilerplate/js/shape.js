@@ -6,7 +6,7 @@ var Shape =  function(x, y) {
 }
 
 extend(Shape.prototype, {
-    initialize: function() {
+    initialize: function(x, y) {
         this.MAX_VELOCITY = 2;
         this.mass = Math.random() * 100;
     },
@@ -28,8 +28,16 @@ extend(Shape.prototype, {
         }
     },
 
-    update: function(w, h, mouse) {
+    update: function(w, h, target) {
         // do stuff here
+
+        this.position.add(this.velocity);
+        this.passThrough(w, h);
+        // this.bounce(w, h);
+    },
+
+    setBehavior: function() {
+        // use stategy pattern
     },
 
     display: function(ctx) {

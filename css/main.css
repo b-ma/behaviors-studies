@@ -12,10 +12,15 @@ a {
     display: block;
 }
 
+.wrapper {
+    width: 500px;
+    margin: 100px auto;
+}
+
 canvas {
     display: block;
     width: 500px;
     height: 200px;
-    margin: 100px auto;
     cursor: pointer;
+    border: 1px solid gray;
 }
