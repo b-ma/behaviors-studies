@@ -28,13 +28,12 @@ var mouse = new Vector;
 
 select.addEventListener('change', function(e) {
     var behavior = e.currentTarget.value;
-
     shapes.forEach(function(shape) {
         shape.setBehavior(behavior);
     });
-});
+}, false);
 
-canvas.addEventListener('mousemove', function(e) {
+canvas.addEventListener('click', function(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);
@@ -45,7 +44,7 @@ canvas.addEventListener('mousemove', function(e) {
     // add layer to scene
     ctx.save();
     ctx.fillStyle = '#000000';
-    // ctx.globalAlpha = 0.1;
+    ctx.globalAlpha = 0.1;
     ctx.fillRect(0, 0, width, height);
     ctx.restore();
 

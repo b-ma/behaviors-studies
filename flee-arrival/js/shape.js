@@ -7,7 +7,7 @@ var Shape =  function(x, y) {
 
 extend(Shape.prototype, {
     initialize: function(x, y, behavior) {
-        this.MAX_VELOCITY = 2;
+        this.MAX_VELOCITY = 1;
         this.mass = Math.random() * 20;
 
         this.setBehavior(behavior);
