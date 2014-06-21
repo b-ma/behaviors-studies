@@ -1,6 +1,7 @@
 //  configuration
-var SHAPE_COUNT = 1;
+var SHAPE_COUNT = 20;
 var shapes = [];
+var obstacles = [];
 
 var width = 500;
 var height = 200;
@@ -28,6 +29,9 @@ var mouse = new Vector;
 canvas.addEventListener('click', function(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
+
+    var obstacle = new Obstacle(mouse.x, mouse.y, Math.random() * 30);
+    obstacles.push(obstacle);
 }, false);
 
 //  loop
@@ -41,15 +45,19 @@ canvas.addEventListener('click', function(e) {
 
     // update scene
     shapes.forEach(function(shape, index) {
-        shape.update(width, height, mouse);
+        shape.update(width, height, mouse, obstacles);
         shape.display(ctx);
     });
 
+    obstacles.forEach(function(obstacle, index) {
+        obstacle.display(ctx);
+    });
+
     //  draw mouse position
-    ctx.beginPath();
-    ctx.fillStyle = '#ff0000';
-    ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
-    ctx.fill();
+    //  ctx.beginPath();
+    //  ctx.fillStyle = '#ff0000';
+    //  ctx.arc(mouse.x, mouse.y, 2, 0, Math.PI * 2, false)
+    //  ctx.fill();
 
     requestAnimationFrame(loop);
 }());
