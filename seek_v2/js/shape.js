@@ -8,10 +8,10 @@ var Shape =  function(x, y) {
 
 extend(Shape.prototype, {
     bounce: function(w, h) {
-        if (this.position.x > w) { this.position.x = 0; }
-        if (this.position.x < 0) { this.position.x = w; }
-        if (this.position.y > h) { this.position.y = 0; }
-        if (this.position.y < 0) { this.position.y = h; }
+        if (this.position.x > w + 100) { this.position.x = 0; }
+        if (this.position.x < 0 - 100) { this.position.x = w; }
+        if (this.position.y > h + 100) { this.position.y = 0; }
+        if (this.position.y < 0 - 100) { this.position.y = h; }
     },
 
     update: function(w, h, mouse) {

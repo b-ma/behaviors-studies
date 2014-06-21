@@ -18,7 +18,7 @@ var mouse = new Vector;
 (function updateTarget() {
     mouse.x = Math.random() * width;
     mouse.y = Math.random() * height;
-    setTimeout(updateTarget, 2 * 1000 * Math.random() + 1500);
+    setTimeout(updateTarget, 2 * 3000 * Math.random() + 1500);
 }());
 // }, false);
 

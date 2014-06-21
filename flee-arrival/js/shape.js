@@ -25,8 +25,8 @@ extend(Shape.prototype, {
             this.velocity.x *= -1;
         }
 
-        if (this.position.y < 0 || this.position.y > w) {
-            this.velocity.x *= -1;
+        if (this.position.y < 0 || this.position.y > h) {
+            this.velocity.y *= -1;
         }
     },
 
