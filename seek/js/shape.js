@@ -26,7 +26,7 @@ extend(Shape.prototype, {
 
         this.velocity
             .add(steering)
-            .normalize(this.MAX_VELOCITY);
+            .truncate(this.MAX_VELOCITY);
 
         this.position.add(this.velocity);
         this.bounce(w, h);

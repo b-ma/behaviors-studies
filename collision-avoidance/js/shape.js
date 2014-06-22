@@ -10,9 +10,9 @@ var Shape =  function(x, y) {
 extend(Shape.prototype, {
     initialize: function(x, y) {
         this.MAX_VELOCITY = 2;
-        this.MAX_SEE_AHEAD = 100; // Math.random() * 100
-        this.MAX_AVOIDANCE_FORCE = 70;
-        this.mass = Math.random() * 100;
+        this.MAX_SEE_AHEAD = 20; // Math.random() * 100
+        this.MAX_AVOIDANCE_FORCE = 2;
+        this.mass = Math.random() * 30;
     },
 
     passThrough: function(w, h) {
@@ -70,6 +70,8 @@ extend(Shape.prototype, {
 
             this.velocity.add(desiredVelocity);
         }
+
+        this.velocity.truncate(this.MAX_VELOCITY);
 
         this.position.add(this.velocity);
         this.passThrough(w, h);
