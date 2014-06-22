@@ -8,6 +8,7 @@ var Shape =  function(x, y) {
 extend(Shape.prototype, {
     initialize: function(x, y) {
         this.MAX_VELOCITY = 2;
+        this.MAX_STEERING = 5;
         this.CIRCLE_DISTANCE = 50;
         this.CIRCLE_RADIUS = 20;
         this.wanderAngle = Math.random() * (2 * Math.PI) - Math.PI;
@@ -37,12 +38,12 @@ extend(Shape.prototype, {
         var steering = this.wank()
 
         steering
-            .normalize()
+            .truncate(this.MAX_STEERING)
             .divide(this.mass);
         // add steering force
         this.velocity
             .add(steering)
-            .normalize(this.MAX_SPEED);
+            .truncate(this.MAX_SPEED);
 
         this.position.add(this.velocity);
         this.passThrough(w, h);
