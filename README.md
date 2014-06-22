@@ -8,3 +8,5 @@ All the tests are adaptations of exmaples from the tutorial serie :
 
 See also :
 [http://gamedevelopment.tutsplus.com/tutorials/at_pco=smlwn-1.0&at_si=53a67cbd92a4c3cf&at_ab=per-2&at_pos=0&at_tot=1](http://gamedevelopment.tutsplus.com/tutorials/at_pco=smlwn-1.0&at_si=53a67cbd92a4c3cf&at_ab=per-2&at_pos=0&at_tot=1)
+
+@TODO create a Class  object with Backbone's extend ability

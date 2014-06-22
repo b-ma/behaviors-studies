@@ -14,10 +14,10 @@ extend(Shape.prototype, {
         if (this.position.y < 0) { this.position.y = h; }
     },
 
-    update: function(w, h, mouse) {
+    update: function(w, h, target) {
         this.velocity.normalize();
 
-        var desiredVelocity = Vector.substract(mouse, this.position);
+        var desiredVelocity = Vector.substract(target, this.position);
         var steering = Vector.substract(desiredVelocity, this.velocity);
 
         steering
