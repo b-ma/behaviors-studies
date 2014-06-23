@@ -7,15 +7,15 @@ var Shape =  function(x, y) {
 
 extend(Shape.prototype, {
     initialize: function(x, y, behavior) {
-        this.MAX_SPEED = 2;
+        this.MAX_SPEED = 3;
         this.MAX_FORCE = 2;
-        this.TIME_AHEAD = 5;
+        this.TIME_AHEAD = 3;
         this.CIRCLE_DISTANCE = 50;
         this.CIRCLE_RADIUS = 20;
         this.wanderAngle = 0;
         this.ANGLE_CHANGE = Math.PI / 6;
 
-        this.mass = Math.random() * 50;
+        this.mass = Math.random() * 1000;
 
         this.color = '#ffffff';
         this.setBehavior(behavior);
