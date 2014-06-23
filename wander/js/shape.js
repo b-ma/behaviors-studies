@@ -50,7 +50,7 @@ extend(Shape.prototype, {
         // this.bounce(w, h);
     },
 
-    wank: function() {
+    wander: function() {
         // define circle center
         var circleCenter = this.velocity.clone();
         circleCenter.normalize(this.CIRCLE_DISTANCE);

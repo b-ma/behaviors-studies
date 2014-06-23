@@ -7,7 +7,8 @@ var Shape =  function(x, y) {
 
 extend(Shape.prototype, {
     initialize: function(x, y) {
-        this.MAX_VELOCITY = 2;
+        this.MAX_SPEED = 2;
+        this.MAX_FORCE = 2;
         this.mass = Math.random() * 100;
     },
 
@@ -29,7 +30,17 @@ extend(Shape.prototype, {
     },
 
     update: function(w, h, target) {
+        var steering = new Vector();
+
         // do stuff here
+
+        steering
+            .divide(this.mass)
+            .truncate(this.MAX_FORCE);
+
+        this.velocity
+            .add(steering)
+            .truncate(this.MAX_SPEED);
 
         this.position.add(this.velocity);
         this.passThrough(w, h);
