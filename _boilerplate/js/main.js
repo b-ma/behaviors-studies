@@ -26,6 +26,7 @@ for (var i = 0; i < SHAPE_COUNT; i++) {
 var mouse = new Vector;
 
 canvas.addEventListener('click', function(e) {
+    e.preventDefault();
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);

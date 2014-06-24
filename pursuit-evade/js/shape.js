@@ -9,23 +9,21 @@ extend(Shape.prototype, {
     initialize: function(x, y, behavior) {
         this.MAX_SPEED = 3;
         this.MAX_FORCE = 2;
-        this.TIME_AHEAD = 3;
+        // this.TIME_AHEAD = 3;
         this.CIRCLE_DISTANCE = 50;
         this.CIRCLE_RADIUS = 20;
         this.wanderAngle = 0;
         this.ANGLE_CHANGE = Math.PI / 6;
 
         this.mass = Math.random() * 1000;
+        this.color = (behavior === 'wander') ? '#ff0000' : '#ffffff' ;
 
-        this.color = '#ffffff';
         this.setBehavior(behavior);
     },
 
     setBehavior: function(behavior) {
+        this.behaviorName = behavior;
         this.behavior = this[behavior];
-        if (behavior === 'wander') {
-            this.color = '#ff0000';
-        }
     },
 
     passThrough: function(w, h) {
@@ -59,14 +57,31 @@ extend(Shape.prototype, {
     },
 
     pursuit: function(target) {
+        var distance = Vector.substract(target.position, this.position);
+        var timeAhead = distance.magnitude() / this.MAX_SPEED;
         var targetVelocity = target.velocity.clone();
-        var futurePosition = Vector.add(target.position, targetVelocity.multiply(this.TIME_AHEAD));
+        var futurePosition = Vector.add(target.position, targetVelocity.multiply(timeAhead));
         return this.seek(futurePosition);
     },
 
-    seek: function(target) {
-        var desiredVelocity = Vector.substract(target, this.position);
+    evade: function(target) {
+        var distance = Vector.substract(target.position, this.position);
+        var timeAhead = distance.magnitude() / this.MAX_SPEED;
+        var targetVelocity = target.velocity.clone();
+        var futurePosition = Vector.add(target.position, targetVelocity.multiply(timeAhead));
+        return this.flee(futurePosition);
+    },
+
+    seek: function(targetPosition) {
+        var desiredVelocity = Vector.substract(targetPosition, this.position);
         var steering = Vector.substract(desiredVelocity, this.velocity);
+        return steering;
+    },
+
+    flee: function(targetPosition) {
+        var desiredVelocity = Vector.substract(targetPosition, this.position);
+        var steering = Vector.substract(desiredVelocity, this.velocity);
+        steering.multiply(-1);
         return steering;
     },
 

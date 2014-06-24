@@ -7,6 +7,7 @@ var height = 200;
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+var select = document.getElementById('select');
 
 ctx.canvas.width = width;
 ctx.canvas.height = height;
@@ -27,9 +28,17 @@ for (var i = 0; i < SHAPE_COUNT; i++) {
 var mouse = new Vector;
 
 canvas.addEventListener('click', function(e) {
+    e.preventDefault();
     mouse.x = e.offsetX;
     mouse.y = e.offsetY;
 }, false);
+
+select.addEventListener('change', function(e) {
+    shapes.forEach(function(shape) {
+        if (shape.behaviorName === 'wander') { return; }
+        shape.setBehavior(select.value)
+    });
+});
 
 //  loop
 (function loop() {
